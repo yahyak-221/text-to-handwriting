@@ -1,15 +1,22 @@
-/* CSS Variables */
-html,
-body {
-  margin: 0px;
+/**
+ * @file index.css
+ * @description Main stylesheet for core layout, typography, and component styling.
+ * @version 1.0
+ */
+
+/* ==========================================================================
+   1. CSS Variables & Theme Setup
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
 }
-body {
+
+:root {
   --background-primary: #fff;
   --font-color-primary: #333;
   --elevation-background: #f3f3f3;
   --link-color: #006eb8;
-  --font-family-primary: 'Roboto', Arial;
-  --handwriting-font: 'Homemade Apple', cursive;
   --primary-color: #1a73e8;
   --ink-color: #000f55;
   --label-color: #333;
@@ -19,9 +26,10 @@ body {
   --font-color-delete: #dc3545;
   --delete-button-borders: #dc3545;
 
-  width: 100%;
-  overflow-x: hidden;
+  --font-family-primary: "Roboto", Arial, sans-serif;
+  --handwriting-font: "Homemade Apple", cursive;
 }
+
 body.dark {
   --background-primary: #121212;
   --font-color-primary: #ccc;
@@ -34,40 +42,72 @@ body.dark {
   --delete-button-borders: #e76f7b;
   --font-color-delete: #e76f7b;
 }
+
 @font-face {
-  font-family: 'Hindi_Font';
+  font-family: "Hindi_Font";
   src: url(../fonts/Hindi_Type.ttf);
 }
 
-/* Default CSS Changes */
+/* ==========================================================================
+   2. Global Resets & Base Styles
+   ========================================================================== */
+
 * {
   box-sizing: border-box;
 }
+
+html,
 body {
+  margin: 0;
+}
+
+body {
+  width: 100%;
   background-color: var(--background-primary);
   color: var(--font-color-primary);
-  padding: 100px 100px;
-  font-size: 1.05rem;
   font-family: var(--font-family-primary);
+  font-size: 1.05rem;
+  padding: 100px;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+section {
+  padding: 20px 0;
+}
+
+/* ==========================================================================
+   3. Base Element Styling (Typography, Links)
+   ========================================================================== */
+
+h1 {
+  font-size: 3rem;
+}
+
 a {
   text-decoration: none;
   color: var(--link-color);
 }
-section {
-  padding: 20px 0px;
+
+ul.info-ul {
+  padding-left: 20px;
 }
+
+ul.info-ul > li {
+  padding: 5px;
+}
+
+/* ==========================================================================
+   4. Form Elements
+   ========================================================================== */
+
 button {
-  border: none;
+  border: 0;
   background-color: var(--elevation-background);
   color: var(--font-color-primary);
   border-radius: 6px;
   cursor: pointer;
   padding: 10px 20px;
-}
-
-h1 {
-  font-size: 3rem;
 }
 
 label {
@@ -80,16 +120,25 @@ label.block {
   padding-bottom: 5px;
 }
 
+input,
 select {
-  background: url('../images/dropdown.svg') no-repeat;
-  background-position: calc(100% - 14px) center;
-  border: none;
-  color: #333;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  width: 100%;
   display: block;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--field-borders);
+  color: var(--font-color-primary);
+  background-color: transparent;
+}
+
+select {
+  padding-right: 30px;
+  font-size: 0.9rem;
+  background: url("../images/dropdown.svg") no-repeat;
+  background-position: calc(100% - 14px) center;
   -moz-appearance: none;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 option {
@@ -97,141 +146,115 @@ option {
 }
 
 body.dark select {
-  background: url('../images/dropdown-white.svg') no-repeat;
-  background-position: calc(100% - 14px) center;
+  background-image: url("../images/dropdown-white.svg");
 }
 
-input {
-  padding: 8px 13px;
-  border-radius: 4px;
-  border: 1px solid var(--elevation-background);
-  color: var(--font-color-primary);
-  background-color: transparent;
-  display: block;
-}
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
+input[type="number"] {
+  -moz-appearance: textfield !important;
   -webkit-appearance: none;
   margin: 0;
 }
-input[type='number'] {
-  -moz-appearance: textfield !important;
-  -webkit-appearance: none;
-  width: 100%;
+
+input[type="file"]::-webkit-file-upload-button {
+  display: none;
 }
 
-/* global classes */
-ul.info-ul {
-  padding-left: 20px;
+input[type="file"]::before {
+  content: "Choose File";
+  display: inline-block;
+  background-color: var(--background-primary);
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
 }
 
-ul.info-ul > li {
-  padding: 5px 5px;
+fieldset {
+  padding: 17px 20px;
+  margin-top: 16px;
+  border-radius: 5px;
+  border: 1px solid var(--field-borders);
 }
+
+legend {
+  font-size: 0.88rem;
+  padding: 0 6px;
+  color: var(--font-color-primary);
+}
+
+/* ==========================================================================
+   5. Utility Classes
+   ========================================================================== */
 
 .shadow {
   box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2);
 }
+
 .display-flex {
   display: flex;
 }
+
 .display-flex.padded-flex > div {
-  padding: 0px 10px;
+  padding: 0 10px;
 }
+
 .display-flex.padded-flex > div:first-child {
-  padding-left: unset;
+  padding-left: 0;
 }
+
 .flex-1 {
   flex: 1;
 }
+
 .padding-around {
   padding-right: 30px;
   padding-left: 30px;
 }
+
 .padding-up-down {
   padding-top: 6px;
   padding-bottom: 7px;
 }
 
-/* Other Styles */
-.generate-image-section {
-  padding: 10px 10px;
-  font-size: 1.2rem;
-}
-.generate-image-button {
-  background-color: var(--primary-button-bg);
-  color: var(--primary-button-color);
-  font-size: 1rem;
-}
-.github-corner {
-  position: absolute;
-  top: 0;
-  z-index: 99999;
-  right: 0px;
-}
-body.dark .github-corner {
-  filter: invert(100%);
-}
-.imp-button {
-  color: var(--font-color-primary);
-  border: 1px solid var(--font-color-primary);
-}
-.delete-button {
-  color: var(--font-color-delete);
-  border: 1px solid var(--delete-button-borders);
-  background-color: var(--elevation-background);
-}
-.customization-col {
-  padding: 0px 50px !important;
+.experimental {
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 
-.left-margin-and-content {
-  min-height: calc(100% - 50px);
-}
-
-.sponsor-name-section {
-  padding: 50px 0px;
-}
-.sponsor-container {
-  display: inline-block;
-  color: var(--font-color-primary);
-}
-.sponsor-title {
-  display: block;
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: bold;
-}
+/* ==========================================================================
+   6. Component: Page & Paper Styles
+   ========================================================================== */
 
 .page-a {
   width: 400px;
-  height: calc(11.7 * 400px / 8.3); /* A4 Ratio */
+  height: calc(11.7 * 400px / 8.3); /* A4 Aspect Ratio */
+  position: relative;
   background: #fff;
   border: 1px solid var(--elevation-background);
-  font-size: 10pt;
-  position: relative;
-  top: 0px;
   font-family: var(--handwriting-font);
   color: var(--ink-color);
+  font-size: 10pt;
   line-height: 1.5em;
   overflow-y: auto;
-  scrollbar-color: transparent;
   scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
 }
+
 .paper-content {
   margin: 10px;
   width: 100%;
 }
+
+/* Ruled lines effect */
 .page-a.lines .paper-content {
   background-image: linear-gradient(#999 0.05em, transparent 0.1em);
-  background-color: unset !important;
   background-size: 100% 1.5em;
+  background-color: unset !important;
 }
 
+/* Margin lines effect */
 .margined .paper-content {
-  padding: 5px;
-  margin: 0px;
-  padding-left: 55px;
+  margin: 0;
+  padding: 5px 5px 5px 55px;
 }
 
 .left-margin,
@@ -240,23 +263,23 @@ body.dark .github-corner {
 }
 
 .margined .top-margin {
-  height: 50px;
-  border-bottom: 2px solid pink;
-  width: 100%;
   display: block;
+  height: 50px;
+  width: 100%;
+  border-bottom: 2px solid pink;
   overflow-y: auto;
 }
 
 .margined .left-margin {
-  width: 50px;
-  height: calc(100%);
   display: inline-block;
-  border-right: 2px solid pink;
-  top: 0px;
-  padding-top: 50px;
-  overflow-x: hidden;
   position: absolute;
   left: 0;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  border-right: 2px solid pink;
+  padding-top: 50px;
+  overflow-x: hidden;
 }
 
 .overlay {
@@ -270,28 +293,30 @@ body.dark .github-corner {
 
 .overlay.shadows {
   display: block;
-  /* background-image: linear-gradient(10deg, #000a, #0001); */
+  /* Example shadow: background-image: linear-gradient(10deg, #000a, #0001); */
 }
 
-/* OUTPUT */
-.output {
-  width: 100%;
-  padding: 30px;
-  white-space: nowrap;
-  overflow-x: auto;
-  border: 1px solid var(--elevation-background);
+/* ==========================================================================
+   7. Component: Buttons
+   ========================================================================== */
+
+.generate-image-button {
+  background-color: var(--primary-button-bg);
+  color: var(--primary-button-color);
+  font-size: 1rem;
 }
-.output .close-button {
-  position: absolute;
-  right: -3px;
-  top: -11px;
-  border-radius: 100%;
-  padding: 4px 10px;
-  background-color: #333;
-  color: #fff;
-  font-size: 15pt;
-  font-weight: bold;
+
+.imp-button {
+  color: var(--font-color-primary);
+  border: 1px solid var(--font-color-primary);
 }
+
+.delete-button {
+  color: var(--font-color-delete);
+  border: 1px solid var(--delete-button-borders);
+  background-color: var(--elevation-background);
+}
+
 .download-image-button {
   display: inline-block;
   text-align: center;
@@ -303,125 +328,81 @@ body.dark .github-corner {
   padding: 10px 15px;
   border-radius: 8px;
 }
-#download-as-pdf-button {
-  display: none;
+
+/* ==========================================================================
+   8. Component: Output Section
+   ========================================================================== */
+
+.output {
+  width: 100%;
+  padding: 30px;
+  white-space: nowrap;
+  overflow-x: auto;
+  border: 1px solid var(--elevation-background);
 }
-#download-as-pdf-button.show {
-  display: inline-block;
+
+.output .close-button {
+  position: absolute;
+  right: -3px;
+  top: -11px;
+  border-radius: 100%;
+  padding: 4px 10px;
+  background-color: #333;
+  color: #fff;
+  font-size: 15pt;
+  font-weight: bold;
 }
+
+.output img {
+  width: 300px;
+  margin: 0 10px;
+}
+
+#download-as-pdf-button,
 #delete-all-button {
   display: none;
 }
+
+#download-as-pdf-button.show,
 #delete-all-button.show {
   display: inline-block;
 }
-.output img {
-  width: 300px;
-  margin: 0px 10px;
+
+/* ==========================================================================
+   9. Miscellaneous Components & Sections
+   ========================================================================== */
+
+.github-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9999;
 }
 
-#faq p {
-  overflow-wrap: break-word;
-  overflow: hidden;
-  width: 100%;
+body.dark .github-corner {
+  filter: invert(100%);
 }
 
-#covid-donations ul li {
-  padding: 5px 0px;
+.customization-col {
+  padding: 0 50px !important;
 }
 
-.donations-list {
-  padding: 58px 0px;
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  body {
-    padding: 100px 10px;
-  }
-  h1 {
-    margin-top: 20px;
-    font-size: 3rem;
-  }
-  .padding-around {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  .display-flex.responsive-flex {
-    flex-direction: column;
-  }
-  .customization-col {
-    padding: 100px 5px !important;
-  }
-  .page-container {
-    width: 100%;
-    overflow-x: scroll;
-  }
-
-  .page-container-super {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .output img {
-    width: 200px;
-    margin: 0px 10px;
-  }
-
-  .project-contributors {
-    width: 100%;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-  }
-
-  .contributor-profile {
-    width: 7.5em;
-    height: 150px;
-  }
-
-  .contributor-username {
-    font-size: 9pt;
-  }
-}
-
-fieldset {
-  padding: 17px 20px;
-  border-radius: 5px;
-  border: 1px solid var(--field-borders);
-  margin-top: 16px;
-}
-
-legend {
-  font-size: 0.88rem;
-  padding: 0px 6px;
-  color: var(--font-color-primary);
-}
-
-select,
-input {
-  width: 100%;
-  border: 1px solid var(--field-borders);
-  padding: 10px;
-  padding-right: 30px;
-  color: var(--font-color-primary);
-}
-
-input[type='file']::-webkit-file-upload-button {
-  display: none;
-}
-input[type='file']::before {
-  content: 'Choose File';
+.sponsor-container {
   display: inline-block;
-  background-color: var(--background-primary);
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
+  color: var(--font-color-primary);
+}
+
+.sponsor-title {
+  display: block;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
 }
 
 .postfix-input {
   position: relative;
 }
+
 .postfix-input label {
   display: block;
   margin-bottom: 5px;
@@ -435,15 +416,6 @@ input[type='file']::before {
   font-size: 12px;
 }
 
-.upload-handwriting-container {
-  margin-top: -10px;
-}
-
-.experimental {
-  opacity: 0.8;
-  cursor: not-allowed;
-}
-
 .category-grid {
   display: grid;
   grid-gap: 10px;
@@ -451,20 +423,60 @@ input[type='file']::before {
   grid-auto-columns: 1fr;
 }
 
-.fade-in-dark,
-.fade-in-light {
-  transition: 0.3s ease;
+#faq p {
+  width: 100%;
+  overflow-wrap: break-word;
 }
 
+/* ==========================================================================
+   10. Media Queries & Responsive Design
+   ========================================================================== */
+
 @media (max-width: 768px) {
+  body {
+    padding: 100px 10px;
+  }
+
+  h1 {
+    margin-top: 20px;
+    font-size: 2.5rem; /* Adjusted for smaller screens */
+  }
+
+  .padding-around {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .display-flex.responsive-flex {
+    flex-direction: column;
+  }
+
+  .customization-col {
+    padding: 100px 5px !important;
+  }
+
+  .page-container {
+    width: 100%;
+    overflow-x: scroll;
+  }
+
+  .output img {
+    width: 200px;
+  }
+
+  .project-contributors {
+    width: 100%;
+    overflow-x: scroll;
+  }
+
   .category-grid {
     grid-auto-flow: row;
     grid-auto-rows: 1fr;
   }
 }
 
-/*To generate margin between download as pdf and delete button in small screens*/
 @media (max-width: 430px) {
+  /* Add margin between buttons on small screens */
   .delete-button {
     margin-top: 10px;
   }

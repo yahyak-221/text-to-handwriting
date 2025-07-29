@@ -18,12 +18,6 @@ Convert typed text into realistic handwriting-style images that look like handwr
 
 ---
 
-## 📷 Screenshots
-
-> (You can add image previews here if desired)
-
----
-
 ## 🛠️ Tech Stack
 
 - HTML5, CSS3

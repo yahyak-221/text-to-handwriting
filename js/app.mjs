@@ -162,3 +162,8 @@ document.querySelectorAll(".switch-toggle input").forEach((toggleInput) => {
     }
   });
 });
+
+const img = document.createElement("img");
+img.src = generatedImageURL;
+img.classList.add("output-image"); // ← this is required
+document.getElementById("output").appendChild(img);
