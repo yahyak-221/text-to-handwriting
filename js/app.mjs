@@ -77,10 +77,14 @@ const EVENT_MAP = {
   "#ink-color": {
     on: "change",
     action: (e) => {
-      document.body.style.setProperty("--ink-color", e.target.value);
-      setInkColor(e.target.value);
+      const color = e.target.value;
+      document.body.style.setProperty("--ink-color", color);
+      setInkColor(color);
+
+      document.querySelector(".paper-content").style.color = color;
     },
   },
+
   "#paper-margin-toggle": {
     on: "change",
     action: () => {

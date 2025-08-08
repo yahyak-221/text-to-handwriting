@@ -93,7 +93,7 @@ ul.info-ul {
   padding-left: 20px;
 }
 
-ul.info-ul > li {
+ul.info-ul>li {
   padding: 5px;
 }
 
@@ -193,11 +193,11 @@ legend {
   display: flex;
 }
 
-.display-flex.padded-flex > div {
+.display-flex.padded-flex>div {
   padding: 0 10px;
 }
 
-.display-flex.padded-flex > div:first-child {
+.display-flex.padded-flex>div:first-child {
   padding-left: 0;
 }
 
@@ -226,7 +226,8 @@ legend {
 
 .page-a {
   width: 400px;
-  height: calc(11.7 * 400px / 8.3); /* A4 Aspect Ratio */
+  height: calc(11.7 * 400px / 8.3);
+  /* A4 Aspect Ratio */
   position: relative;
   background: #fff;
   border: 1px solid var(--elevation-background);
@@ -242,6 +243,11 @@ legend {
 .paper-content {
   margin: 10px;
   width: 100%;
+}
+
+.paper-content {
+  color: var(--ink-color, #000f55);
+  /* fallback to blue */
 }
 
 /* Ruled lines effect */
@@ -439,7 +445,8 @@ body.dark .github-corner {
 
   h1 {
     margin-top: 20px;
-    font-size: 2.5rem; /* Adjusted for smaller screens */
+    font-size: 2.5rem;
+    /* Adjusted for smaller screens */
   }
 
   .padding-around {
@@ -476,6 +483,7 @@ body.dark .github-corner {
 }
 
 @media (max-width: 430px) {
+
   /* Add margin between buttons on small screens */
   .delete-button {
     margin-top: 10px;
